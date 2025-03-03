@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            width: 100%;
+        }
+        body::before{
+            content: '';
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background: url('lolong.jpg');
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        .login{
+            width: 400px;
+            padding: 30px;
+            border: 1px solid grey;
+            border: 8px;
+            border-radius: 8px;
+            text-align: center;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        form h2{
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 20px;
+        }
+        .input{
+            position: relative;
+            border-bottom: 2px solid azure;
+        }
+        .input input {
+            width: 100%;
+            height: 40px;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        .input label{
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 1rem;
+            pointer-events: none;
+            transition: 0.3s ease;
+        }
+        .input input:focus~label,
+        .input input:valid~label {
+            transform: translateY(-120%);
+            font-size: 0.8rem;
+            top: 10px;
+        }
+        .remember-me{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 25px 0 35px 0;
+            color: azure;
+        }
+        .remember-me label{
+            display: flex;
+            align-items: center;
+        }
+        #remember {
+            accent-color: #fff;
+        }
+        .remember-me label p{
+            margin-left: 8px;
+        }
+        .login a{
+            color: #fff;
+            text-decoration: none;
+        }
+        .login a:hover{
+            text-decoration: underline;
+        }
+        button{
+            background: #fff;
+            color: black;
+            font-size: 1rem;
+            font-weight: 600px;
+            padding: 12px 20px;
+            border-radius: 5px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: .3s ease;
+        }
+        button:hover{
+            background: grey;
+            color: #fff;
+            border-color: #fff;
+        }
+        .register{
+            text-align: center;
+            margin-top: 30px;
+            color: #fff;
+        }
+    </style>
+    <div class="login">
+        <form action="#" method="post">
+            <h2>Sign In</h2>
+            <div class="input">
+                <input type="text" required>
+                <label>Enter your Email</label>
+            </div>
+            <div class="input">
+                <input type="password" required>
+                <label>Enter your Password</label>
+            </div>
+            <div class="remember-me">
+                <label for="remember">
+                    <input type="checkbox" id="remember">
+                    <p>Remember me</p>
+                </label>
+                <a href="#">Forgot Password</a>
+            </div>
+            <button type="submit">Log In</button>
+            <div class="register">
+                <p>Don't have an account? <a href="register.html">Sign up</a></p>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

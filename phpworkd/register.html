@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        body{
+            background: url('as.jpg');
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            width: 100%;
+        }
+        .container{
+            width: 350px;
+            padding: 2rem 1rem;
+            margin: 50px auto;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        h1{
+            font-size: 2rem;
+            color: #07001f;
+            margin-bottom: 1.2rem;
+        }
+        form input{
+            width: 92%;
+            outline: none;
+            border: 1px solid white;
+            padding: 12px 20px;
+            margin-bottom: 10px;
+            border-radius: 20px;
+            font-size: 1rem;
+            background: transparent;
+        }
+        input::placeholder{
+            color: #fff;
+        }
+        button{
+            font-size: 1rem;
+            margin-top: 1.8rem;
+            padding: 10px 0;
+            border-radius: 20px;
+            outline: none;
+            border: none;
+            width: 90%;
+            color: #fff;
+            cursor: pointer;
+            background: black;
+            transition: .3s ease;
+        }
+        button:hover{
+            background: grey;
+        }
+        .terms{
+            margin: 0.2rem;
+        }
+        .terms input{
+            height: 1em;
+            width: 1em;
+            vertical-align: middle;
+            cursor: pointer;
+        }
+        .terms label{
+            font-size: .9rem;
+            color: white;
+        }
+        .terms a{
+            color: white;
+            text-decoration: none;
+        }
+        .login{
+            font-size: 1rem;
+            margin-top: 1.4rem;
+            color: white;
+        }
+        .login a{
+            color: white;
+            text-decoration: none;
+        }
+        .login a:hover{
+            text-decoration: underline;
+        }
+    </style>
+    <div class="container">
+        <h1>Sign Up</h1>
+        <form action="#">
+            <input type="text" placeholder="Username">
+            <input type="Email" placeholder="Email">
+            <input type="password" placeholder="Password">
+            <input type="password" placeholder="Re-Enter Password">
+        </form>
+        <div class="terms">
+            <input type="checkbox" id="checkbox">
+            <label for="checkbox">I agree to these <a href="#">
+                Terms & Conditons
+            </a></label>
+        </div>
+        <button>Sign Up</button>
+        <div class="login">
+            Already have an account <a href="login.html">Sign In</a>
+        </div>
+    </div>   
+</body>
+</html>
