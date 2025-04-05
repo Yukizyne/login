@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Side by Side Layout</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #1e1e1e;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        #calcu,
+        #info-box {
+            background-color: hsl(0, 0%, 27%);
+            border-radius: 15px;
+            padding: 20px;
+            width: 300px;
+        }
+
+        #display {
+            width: 100%;
+            padding: 15px;
+            font-size: 2.5rem;
+            text-align: right;
+            border: none;
+            background-color: hsl(0, 0%, 27%);
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        #keys {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        button {
+            width: 60px;
+            height: 60px;
+            border-radius: 30px;
+            border: none;
+            background-color: hsl(24, 90%, 50%);
+            color: black;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: hsl(24, 90%, 60%);
+        }
+
+        button:active {
+            background-color: hsl(24, 90%, 80%);
+        }
+
+        .btn-operator {
+            background-color: hsl(123, 87%, 50%);
+        }
+
+        .btn-operator:hover {
+            background-color: hsl(123, 87%, 30%);
+        }
+
+        .btn-operator:active {
+            background-color: hsl(123, 87%, 70%);
+        }
+
+        #info-box select,
+        #info-box input {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #info-box button {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: 8px;
+            background-color: hsl(210, 90%, 50%);
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        #info-box button:hover {
+            background-color: hsl(210, 90%, 40%);
+        }
+
+        #totalDisplay {
+            margin-top: 10px;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div id="info-box">
+            <form>
+                <label for="food">Food:</label>
+                <select id="food" name="food">
+                    <option value="Burger" data-price="50">Burger - ₱50</option>
+                    <option value="Pizza" data-price="100">Pizza - ₱100</option>
+                    <option value="Hotdog" data-price="40">Hotdog - ₱40</option>
+                    <option value="Siomai-Rice" data-price="40">Siomai-Rice - ₱40</option>
+                </select>
+
+                <label for="drink">Drink:</label>
+                <select id="drink" name="drink">
+                    <option value="Coke" data-price="30">Coke - ₱30</option>
+                    <option value="Pepsi" data-price="30">Pepsi - ₱30</option>
+                    <option value="Water" data-price="20">Water - ₱20</option>
+                    <option value="Sting" data-price="25">Sting - ₱25</option>
+                </select>
+
+                <label for="fruit">Fruit:</label>
+                <select id="fruit" name="fruit">
+                    <option value="Apple" data-price="120">Apple - ₱120</option>
+                    <option value="Orange" data-price="130">Orange - ₱130</option>
+                    <option value="Grape" data-price="150">Grape - ₱150</option>
+                    <option value="Mango" data-price="125">Mango - ₱125</option>
+                </select>
+
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" name="quantity" min="1" value="1">
+                <button onclick="submitOrder()" type="submit">Submit Order</button>
+                <h2 id="Receipt"></h2>
+                <h2 id="foods"></h2>
+                <h2 id="drinks"></h2>
+                <h2 id="fruits"></h2>
+                <h2 id="Totals"></h2>
+            </form>
+        </div>
+        <div id="calcu">
+            <input id="display" readonly />
+            <div id="keys">
+                <button onclick="appendToDisplay('+')" class="btn-operator">+</button>
+                <button onclick="appendToDisplay('7')">7</button>
+                <button onclick="appendToDisplay('8')">8</button>
+                <button onclick="appendToDisplay('9')">9</button>
+                <button onclick="appendToDisplay('-')" class="btn-operator">-</button>
+                <button onclick="appendToDisplay('4')">4</button>
+                <button onclick="appendToDisplay('5')">5</button>
+                <button onclick="appendToDisplay('6')">6</button>
+                <button onclick="appendToDisplay('*')" class="btn-operator">×</button>
+                <button onclick="appendToDisplay('1')">1</button>
+                <button onclick="appendToDisplay('2')">2</button>
+                <button onclick="appendToDisplay('3')">3</button>
+                <button onclick="appendToDisplay('/')" class="btn-operator">÷</button>
+                <button onclick="appendToDisplay('0')">0</button>
+                <button onclick="appendToDisplay('.')">.</button>
+                <button onclick="calculate()">=</button>
+                <button onclick="clearDisplay()" class="btn-operator">C</button>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        document.getElementById("food").addEventListener("change", totalPrice);
+        document.getElementById("drink").addEventListener("change", totalPrice);
+        document.getElementById("fruit").addEventListener("change", totalPrice);
+        document.getElementById("quantity").addEventListener("input", totalPrice);
+        function totalPrice() {
+            let food = document.getElementById("food");
+            let drink = document.getElementById("drink");
+            let fruit = document.getElementById("fruit");
+            let quantity = parseInt(document.getElementById("quantity").value);
+
+            let foodPrice = parseInt(food.options[food.selectedIndex].dataset.price);
+            let drinkPrice = parseInt(drink.options[drink.selectedIndex].dataset.price);
+            let fruitPrice = parseInt(fruit.options[fruit.selectedIndex].dataset.price);
+        }
+        function submitOrder() {
+            event.preventDefault();
+            let food = document.getElementById("food").value;
+            let drink = document.getElementById("drink").value;
+            let fruit = document.getElementById("fruit").value;
+            let quantity = parseInt(document.getElementById("quantity").value)
+
+            let foodPrice = parseInt(document.getElementById("food")
+                .options[document.getElementById("food").selectedIndex].dataset.price);
+
+            let drinkPrice = parseInt(document.getElementById("drink")
+                .options[document.getElementById("drink").selectedIndex].dataset.price);
+
+            let fruitPrice = parseInt(document.getElementById("fruit")
+                .options[document.getElementById("fruit").selectedIndex].dataset.price);
+
+            let total = (foodPrice + drinkPrice + fruitPrice) * quantity;
+
+            document.getElementById("Receipt").innerText = "Receipt";
+            document.getElementById("foods").innerText = `${food} - ${foodPrice} - ${quantity}`;
+            document.getElementById("drinks").innerText = `${drink} - ${drinkPrice} - ${quantity}`;
+            document.getElementById("fruits").innerText = `${fruit} - ${fruitPrice} - ${quantity}`;
+        }
+
+        const display = document.getElementById("display");
+
+        function appendToDisplay(input) {
+            display.value += input;
+        }
+
+        function clearDisplay() {
+            display.value = "";
+        }
+
+        function calculate() {
+            try {
+                display.value = eval(display.value);
+            } catch (error) {
+                display.value = "Error";
+            }
+        }
+    </script>
+</body>
+
+</html>
